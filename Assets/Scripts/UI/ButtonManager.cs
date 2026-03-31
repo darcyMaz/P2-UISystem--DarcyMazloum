@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
-	// Generalize StartMenuManager into ButtonManager
-	// Think over collecting all buttons in this way
-	
-	private void Awake()
-	{
-		// Grab all the buttons in the scene
-		// Subscribe to their events
-	}
+	/**
+	 *  The ButtonManager is subscribed to the events on all the buttons.
+	 *  It will do stuff related to the buttons that does not directly manipulate those buttons.
+	 *  Ex. Audio, scene changes.
+	 * 
+	 *  Meanwhile, the buttons have their own functions that manipulate themselves.
+	 *  Ex. Change the sprite. 
+	 **/
 	
 	private void OnEnable()
 	{
@@ -33,17 +33,17 @@ public class ButtonManager : MonoBehaviour
 		}
 	}
 	
-	private void SetButtonStandard(UIButton button, ButtonData buttonData)
+	private void SetButtonStandard(ButtonData buttonData)
 	{
 		
 	}
 	
-	private void SetButtonHover(UIButton button, ButtonData buttonData)
+	private void SetButtonHover(ButtonData buttonData)
 	{
 		
 	}
 	
-	private void SetButtonClick(UIButton button, ButtonData buttonData)
+	private void SetButtonClick(ButtonData buttonData)
 	{
 		
 	}
