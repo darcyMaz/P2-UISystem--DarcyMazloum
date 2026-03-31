@@ -10,8 +10,8 @@ public class UIButton : MonoBehaviour
 	[SerializeField] private ButtonData buttonData;
 	
     public event Action <UIButton, ButtonData> OnHover;
-    public event Action <ButtonData> OnClick;
-    public event Action <ButtonData> OnHoverExit;
+    public event Action <UIButton, ButtonData> OnClick;
+    public event Action <UIButton, ButtonData> OnHoverExit;
     
     private void Awake()
     {
@@ -24,11 +24,11 @@ public class UIButton : MonoBehaviour
 	}
 	private void HoverExit()
 	{
-		OnHoverExit?.Invoke(buttonData);
+		OnHoverExit?.Invoke(this, buttonData);
 	}
 	private void Click()
 	{
-		OnClick?.Invoke(buttonData);
+		OnClick?.Invoke(this, buttonData);
 	}
 	
 	public static IEnumerable<UIButton> GetUIButtons()
