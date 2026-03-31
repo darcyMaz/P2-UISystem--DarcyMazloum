@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class UIButton : MonoBehaviour
 {
-	// Do I want this list in UIButton or in StartMenuButton ...
 	private static List<UIButton> buttons = new List<UIButton>();
 	
 	[SerializeField] private ButtonData buttonData;

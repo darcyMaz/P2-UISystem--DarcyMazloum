@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StartMenuManager : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
 	// Generalize StartMenuManager into ButtonManager
 	// Think over collecting all buttons in this way
