@@ -22,60 +22,21 @@ public class MainMenuManager : MonoBehaviour
 		Instance = this;
 	}
 	
-	public void RegisterButton(int buttonID, Action action)
+	public void RegisterButton(UIButton button, int buttonID, Action action)
 	{
 		// Try add, I'll check this
 		actions.Add(buttonID, action);
+		
+		// susbcribe to the button
+		button.OnClick += action;
 	}
-	public void DeregisterButton(int buttonID)
+	public void DeregisterButton(UIButton button, int buttonID)
 	{
+		// Unsubscribe from the button's action.
+		button.OnClick -= actions[buttonID];
+		
 		// Try remove button from dict
 		actions.Remove(buttonID);
 	}
-	
-	/*
-	private void OnEnable()
-	{
-		
-		foreach (UIButton button in UIButton.GetUIButtons())
-		{
-			// subscribe to button events
-			button.OnHoverExit += SetButtonStandard;
-			button.OnHover += SetButtonHover;
-			button.OnClick += SetButtonClick;
-		}
-	}
-	
-	private void OnDisable()
-	{
-		foreach (UIButton button in UIButton.GetUIButtons())
-		{
-			// unsubscribe to button events
-			button.OnHoverExit -= SetButtonStandard;
-			button.OnHover -= SetButtonHover;
-			button.OnClick -= SetButtonClick;
-		}
-	}
-	*/
-	
-	
-	
-	private void SetButtonStandard(ButtonData buttonData)
-	{
-		// Using the ButtonData, do stuff that does not directly effect the button.
-		// ex. play a sound.
-	}
-	
-	private void SetButtonHover(ButtonData buttonData)
-	{
-		
-	}
-	
-	private void SetButtonClick(ButtonData buttonData)
-	{
-		
-	}
-	
-	
 	
 }

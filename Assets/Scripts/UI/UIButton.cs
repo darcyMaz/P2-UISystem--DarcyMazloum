@@ -19,17 +19,13 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	private static int ButtonIDCounter = -1;
 	private int ButtonID;
 	
-	// Statically accessible list of all buttons.
-	// List can't be accessed directly, only as an iterator.
-	// private static List<UIButton> buttons = new List<UIButton>();
-	
 	// ButtonData holds specific data for this button.
 	// It is held in a ScriptableObject.
 	[SerializeField] private ButtonData buttonData;
 	
-    public event Action <ButtonData> OnHover;
-    public event Action <ButtonData> OnClick;
-    public event Action <ButtonData> OnHoverExit;
+    public event Action OnHover;
+    public event Action OnClick;
+    public event Action OnHoverExit;
     
     // The Button object on the canvas.
     private Button button;
@@ -40,12 +36,11 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool FoundImg = false;
     
     protected virtual void Awake()
-    {
-		// Add this button to the list of buttons.
-		// buttons.Add(this);
-		
+    {	
 		ButtonIDCounter++;
 		ButtonID = ButtonIDCounter; 
+		
+		MainMenuManager.Instance.RegisterButton(this, ButtonID, ClickAction);
 		
 		// Try to find the Button and the Image components.
 		if (!TryGetComponent(out button)) Debug.Log("A UIButton Component could not find the Button it is supposed to be attached to.");
@@ -61,10 +56,15 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 	}
 	
+	protected virtual void ClickAction()
+	{
+		// This will be overwritten by a child class.
+	}
+	
 	private void OnDisable()
 	{
 		// Check this.
-		button.onClick.RemoveListener(Click);
+		// button.onClick.RemoveListener(Click);
 	}
 	
 	private void Click()
@@ -75,7 +75,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		if (FoundButton)
 		{
-			OnClick?.Invoke(buttonData);
+			OnClick?.Invoke();
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		if (FoundButton) 
 		{
-			OnHover?.Invoke(buttonData);
+			OnHover?.Invoke();
 		}
     }
     
@@ -99,16 +99,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		if (FoundButton)
 		{
-			OnHoverExit?.Invoke(buttonData);
+			OnHoverExit?.Invoke();
 		}
     }
-    /*
-    public static IEnumerable<UIButton> GetUIButtons()
-	{
-		foreach (UIButton item in buttons)
-		{
-			yield return item;
-		}
-	}
-	*/
 }
