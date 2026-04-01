@@ -16,21 +16,25 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	 * 
 	 */
 	
+	// Statically accessible list of all buttons.
+	// List can't be accessed directly, only as an iterator.
 	private static List<UIButton> buttons = new List<UIButton>();
 	
+	// ButtonData holds specific data for this button.
+	// It is held in a ScriptableObject.
 	[SerializeField] private ButtonData buttonData;
 	
     public event Action <ButtonData> OnHover;
     public event Action <ButtonData> OnClick;
     public event Action <ButtonData> OnHoverExit;
     
+    // The Button object on the canvas.
     private Button button;
     private bool FoundButton = false;
     
+    // The Image object on the canvas, where the sprites go.
     private Image img;
     private bool FoundImg = false;
-    
-    private bool SpriteLock = false;
     
     private void Awake()
     {
@@ -66,14 +70,12 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 	
 	private void Click()
-	{
+	{	
 		if (!FoundButton) return;
 		
 		if (FoundImg) 
 		{
-			SpriteLock = true;
 			img.sprite = buttonData.GetClickSprite();
-			//SpriteLock = true;
 		}
 		
 		OnClick?.Invoke(buttonData);
@@ -81,13 +83,13 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	
 	public void OnPointerEnter(PointerEventData eventData)
     {
-		if (FoundImg && !SpriteLock) img.sprite = buttonData.GetHoverSprite();
+		if (FoundImg) img.sprite = buttonData.GetHoverSprite();
 		HoverEnter();
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (FoundImg && !SpriteLock) img.sprite = buttonData.GetStandardSprite();
+        if (FoundImg) img.sprite = buttonData.GetStandardSprite();
         HoverExit();
     }
     

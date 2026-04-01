@@ -11,6 +11,13 @@ public class ButtonManager : MonoBehaviour
 	 *  Ex. Change the sprite. 
 	 **/
 	
+	// private Dictionary<ButtonType, Func<void,void>> 
+	
+	private void Awake()
+	{
+		
+	}
+	
 	private void OnEnable()
 	{
 		foreach (UIButton button in UIButton.GetUIButtons())
@@ -35,6 +42,9 @@ public class ButtonManager : MonoBehaviour
 	
 	private void SetButtonStandard(ButtonData buttonData)
 	{
+		// Using the ButtonData, do stuff that does not directly effect the button.
+		// ex. play a sound.
+		
 		
 	}
 	
@@ -47,5 +57,4 @@ public class ButtonManager : MonoBehaviour
 	{
 		
 	}
-	
 }

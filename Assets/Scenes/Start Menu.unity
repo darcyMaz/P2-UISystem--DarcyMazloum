@@ -186,7 +186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 172}
+  m_AnchoredPosition: {x: 0, y: 44}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690855774
@@ -208,7 +208,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -218,9 +218,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: -4133052031255128059, guid: 69a607c984d74e84dab1320b2f31c43f, type: 3}
+    m_PressedSprite: {fileID: 966445092007050933, guid: f3d28edce15b5ea43bfd892c9eb1901d, type: 3}
+    m_SelectedSprite: {fileID: 966445092007050933, guid: f3d28edce15b5ea43bfd892c9eb1901d, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -280,11 +280,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 690855772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fda1f4ffb78a8c41a4164290942d051, type: 3}
+  m_Script: {fileID: 11500000, guid: 84dbf2a0c11201f4f85c084da1eefcb4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartMenuButton
+  m_EditorClassIdentifier: Assembly-CSharp::UIButton
   buttonData: {fileID: 11400000, guid: 45228bada9b1a4c449128265ae670df1, type: 2}
-  buttonType: 0
 --- !u!1 &1343626689
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -308}
+  m_AnchoredPosition: {x: 0, y: -143}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501212545
@@ -479,7 +478,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -524,7 +523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -567465399728451620, guid: c99f13f48286bc34d9a6d172e31cf06e, type: 3}
+  m_Sprite: {fileID: -4631515959758686043, guid: aeb84c2fc3033cb4bbdb69b40075a19b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
