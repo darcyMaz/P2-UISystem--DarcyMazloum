@@ -1,6 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
-public class ButtonManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
 	/**
 	 *  The ButtonManager is subscribed to the events on all the buttons.
@@ -11,15 +13,30 @@ public class ButtonManager : MonoBehaviour
 	 *  Ex. Change the sprite. 
 	 **/
 	
-	// private Dictionary<ButtonType, Func<void,void>> 
+	public static MainMenuManager Instance {get; private set;}
+	private Dictionary<int, Action> actions = new Dictionary<int, Action>();
 	
 	private void Awake()
 	{
-		
+		if (Instance != null && Instance != this) {Destroy(gameObject); return;}
+		Instance = this;
 	}
 	
+	public void RegisterButton(int buttonID, Action action)
+	{
+		// Try add, I'll check this
+		actions.Add(buttonID, action);
+	}
+	public void DeregisterButton(int buttonID)
+	{
+		// Try remove button from dict
+		actions.Remove(buttonID);
+	}
+	
+	/*
 	private void OnEnable()
 	{
+		
 		foreach (UIButton button in UIButton.GetUIButtons())
 		{
 			// subscribe to button events
@@ -39,13 +56,14 @@ public class ButtonManager : MonoBehaviour
 			button.OnClick -= SetButtonClick;
 		}
 	}
+	*/
+	
+	
 	
 	private void SetButtonStandard(ButtonData buttonData)
 	{
 		// Using the ButtonData, do stuff that does not directly effect the button.
 		// ex. play a sound.
-		
-		
 	}
 	
 	private void SetButtonHover(ButtonData buttonData)
@@ -57,4 +75,7 @@ public class ButtonManager : MonoBehaviour
 	{
 		
 	}
+	
+	
+	
 }

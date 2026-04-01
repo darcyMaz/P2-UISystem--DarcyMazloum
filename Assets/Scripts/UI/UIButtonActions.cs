@@ -10,9 +10,6 @@ public class UIButtonActions : MonoBehaviour
     
     private void Awake()
     {
-		// get button
-		// subscribe to functions
-		
 		if (!TryGetComponent(out button)) Debug.Log("A UIButtonActions component could not find a UIButton on the same GameObject.");
 		else FoundButton = true;
 	}

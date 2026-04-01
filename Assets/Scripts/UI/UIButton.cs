@@ -16,9 +16,12 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	 * 
 	 */
 	
+	private static int ButtonIDCounter = -1;
+	private int ButtonID;
+	
 	// Statically accessible list of all buttons.
 	// List can't be accessed directly, only as an iterator.
-	private static List<UIButton> buttons = new List<UIButton>();
+	// private static List<UIButton> buttons = new List<UIButton>();
 	
 	// ButtonData holds specific data for this button.
 	// It is held in a ScriptableObject.
@@ -36,63 +39,70 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Image img;
     private bool FoundImg = false;
     
-    private void Awake()
+    protected virtual void Awake()
     {
 		// Add this button to the list of buttons.
-		buttons.Add(this);
+		// buttons.Add(this);
 		
+		ButtonIDCounter++;
+		ButtonID = ButtonIDCounter; 
+		
+		// Try to find the Button and the Image components.
 		if (!TryGetComponent(out button)) Debug.Log("A UIButton Component could not find the Button it is supposed to be attached to.");
 		else FoundButton = true;
 		
 		if (!TryGetComponent(out img)) Debug.Log("A UIButton Component could not find the Image component.");
 		else FoundImg = true;
 		
+		// Add the Click() function to the Button's onClick listeners.
 		if (FoundButton)
 		{
 			button.onClick.AddListener(Click);
 		}
 	}
-    
-    private void HoverEnter()
-	{
-		if (!FoundButton) return;
-		
-		// Invoke the events for other objects.
-		OnHover?.Invoke(buttonData);
-		
-		// Manipulate this button directly.
-	}
 	
-	private void HoverExit()
+	private void OnDisable()
 	{
-		if (!FoundButton) return;
-		OnHoverExit?.Invoke(buttonData);
+		// Check this.
+		button.onClick.RemoveListener(Click);
 	}
 	
 	private void Click()
 	{	
-		if (!FoundButton) return;
-		
 		if (FoundImg) 
 		{
 			img.sprite = buttonData.GetClickSprite();
 		}
-		
-		OnClick?.Invoke(buttonData);
+		if (FoundButton)
+		{
+			OnClick?.Invoke(buttonData);
+		}
 	}
 	
 	public void OnPointerEnter(PointerEventData eventData)
     {
-		if (FoundImg) img.sprite = buttonData.GetHoverSprite();
-		HoverEnter();
+		if (FoundImg) 
+		{
+			img.sprite = buttonData.GetHoverSprite();
+		}
+		if (FoundButton) 
+		{
+			OnHover?.Invoke(buttonData);
+		}
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (FoundImg) img.sprite = buttonData.GetStandardSprite();
-        HoverExit();
+        if (FoundImg) 
+        {
+			img.sprite = buttonData.GetStandardSprite();
+		}
+		if (FoundButton)
+		{
+			OnHoverExit?.Invoke(buttonData);
+		}
     }
-    
+    /*
     public static IEnumerable<UIButton> GetUIButtons()
 	{
 		foreach (UIButton item in buttons)
@@ -100,4 +110,5 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			yield return item;
 		}
 	}
+	*/
 }
