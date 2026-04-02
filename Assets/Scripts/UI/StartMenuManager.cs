@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 /**
  *  Render mode decision: I chose Screen Space - Overlay because the main menu does not rely on anything in front of the camera like moving GameObjects or lighting effects. 
@@ -9,6 +10,15 @@ using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
 {
+	
+	public event Action OnReady;
+	public event Action OnStart;
+	public event Action OnSettings;
+	public event Action OnQuit;
+	
+	public StartMenuState GetStartMenuState() => state;
+	private StartMenuState state = StartMenuState.Ready;
+	
 	[SerializeField] private Button StartButton;
 	[SerializeField] private Button SettingsButton;
 	[SerializeField] private Button CloseSettingsButton;
@@ -35,18 +45,30 @@ public class StartMenuManager : MonoBehaviour
 	
 	private void StartGame()
 	{
+		OnStart?.Invoke();
 		SceneManager.Instance.BufferSceneChange(StartSceneName);
 	}
 	private void QuitGame()
 	{
+		OnQuit?.Invoke();
 		Application.Quit();
 	}
 	private void OpenSettings()
 	{
+		OnSettings?.Invoke();
 		panel.SetActive(true);
 	}
 	private void CloseSettings()
 	{
+		OnReady?.Invoke();
 		panel.SetActive(false);
 	}
+}
+
+public enum StartMenuState
+{
+	Ready,
+	Start,
+	Settings,
+	Quit
 }
