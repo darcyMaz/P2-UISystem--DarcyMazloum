@@ -10,14 +10,13 @@ using System;
 
 public class StartMenuManager : MonoBehaviour
 {
-	
 	public event Action OnReady;
 	public event Action OnStart;
 	public event Action OnSettings;
 	public event Action OnQuit;
 	
-	public StartMenuState GetStartMenuState() => state;
 	private StartMenuState state = StartMenuState.Ready;
+	public StartMenuState GetStartMenuState() => state;
 	
 	[SerializeField] private Button StartButton;
 	[SerializeField] private Button SettingsButton;
@@ -25,7 +24,6 @@ public class StartMenuManager : MonoBehaviour
 	[SerializeField] private Button QuitButton;
 	
 	[SerializeField] private GameObject panel;
-	
 	[SerializeField] private string StartSceneName;
 	
 	private void OnEnable()
