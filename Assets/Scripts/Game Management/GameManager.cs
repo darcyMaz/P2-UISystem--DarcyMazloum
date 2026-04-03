@@ -2,6 +2,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
+/**
+ *  Event choice explanation:
+ *  I chose UnityEvents for all but the Timer which uses a C# event.
+ * 
+ *  The onTimerIncrement event happens many times per second and is thus better suited as a C# event which has better performance.
+ *  Meanwhile, the rest of the events are triggered by interacting with other UI elements (and potentially character's interacting with GameObjects),
+ *  which are easily configured using UnityEvents.
+ *  
+ */ 
+
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance {get; private set;}
