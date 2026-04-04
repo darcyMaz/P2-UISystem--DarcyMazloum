@@ -5217,7 +5217,7 @@ MonoBehaviour:
   onItemRemoveFailed:
     m_PersistentCalls:
       m_Calls: []
-  MaximumItems: 16
+  MaximumItems: 15
 --- !u!114 &1401889732
 MonoBehaviour:
   m_ObjectHideFlags: 0
