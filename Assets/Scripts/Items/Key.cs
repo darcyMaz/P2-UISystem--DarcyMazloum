@@ -4,12 +4,12 @@ using UnityEngine;
 public class Key : ScriptableObject
 {
     [SerializeField] private Sprite sprite;
-    [SerializeField] private string keyName;
-    [SerializeField] private int doorThisKeyOpens; // Imagine that this field is more developed in some way for a real game.
-    [SerializeField] private ItemType itemType;
-    
-    //protected virtual Sprite GetSprite() => sprite;
-    //protected virtual string GetKeyName() => keyName;
-    //protected virtual int GetDoorThisKeyOpens() => doorThisKeyOpens;
-    //protected ItemType GetItemType() => itemType;
+    [SerializeField] private string keyName = "Key";
+    [SerializeField] private int doorThisKeyOpens = 0; // Imagine that this field is more developed in some way for a real game.
+    [SerializeField] private ItemType itemType = ItemType.Key;
+
+    public Sprite GetSprite() => sprite;
+    public string GetKeyName() => keyName;
+    public int GetDoorThisKeyOpens() => doorThisKeyOpens;
+    public ItemType GetItemType() => itemType;
 }

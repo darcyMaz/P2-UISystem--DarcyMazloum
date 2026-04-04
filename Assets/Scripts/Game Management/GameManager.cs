@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private float timer = 0f;
     
     [SerializeField] private GameObject QuestPanel;
+	[SerializeField] private GameObject InventoryPanel;
     
     private void Awake()
     {
@@ -93,6 +94,9 @@ public class GameManager : MonoBehaviour
 	
 	public void FlipInventoryPanel()
 	{
-		
-	}
+        if (InventoryPanel != null)
+        {
+            InventoryPanel.SetActive(!InventoryPanel.activeSelf);
+        }
+    }
 }
