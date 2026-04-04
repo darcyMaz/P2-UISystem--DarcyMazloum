@@ -300,10 +300,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e097b317d774054e9dce63a687c5050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartMenuManager
-  StartButton: {fileID: 690855774}
-  SettingsButton: {fileID: 1501212545}
-  CloseSettingsButton: {fileID: 598605829}
-  QuitButton: {fileID: 1241934102}
+  OnReady:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSettings:
+    m_PersistentCalls:
+      m_Calls: []
+  OnQuit:
+    m_PersistentCalls:
+      m_Calls: []
   panel: {fileID: 1502456489}
   StartSceneName: Game Scene
 --- !u!1 &485910424
@@ -363,7 +371,7 @@ GameObject:
   - component: {fileID: 598605830}
   - component: {fileID: 598605829}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Close Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +440,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 598605830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 477403413}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: CloseSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &598605830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +572,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 690855775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 477403413}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &690855775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1241934103}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 477403413}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1241934103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +973,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1501212546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 477403413}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1501212546
 MonoBehaviour:
   m_ObjectHideFlags: 0

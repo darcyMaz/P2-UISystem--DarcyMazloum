@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System;
 
 /**
@@ -10,57 +11,41 @@ using System;
 
 public class StartMenuManager : MonoBehaviour
 {
-	public event Action OnReady;
-	public event Action OnStart;
-	public event Action OnSettings;
-	public event Action OnQuit;
-	
+	[SerializeField] UnityEvent OnReady;
+	[SerializeField] UnityEvent OnStart;
+	[SerializeField] UnityEvent OnSettings;
+	[SerializeField] UnityEvent OnQuit;
+
 	private StartMenuState state = StartMenuState.Ready;
 	public StartMenuState GetStartMenuState() => state;
 	
-	[SerializeField] private Button StartButton;
-	[SerializeField] private Button SettingsButton;
-	[SerializeField] private Button CloseSettingsButton;
-	[SerializeField] private Button QuitButton;
-	
 	[SerializeField] private GameObject panel;
 	[SerializeField] private string StartSceneName;
-	
-	private void OnEnable()
+
+	public void StartGame()
 	{
-		StartButton.onClick.AddListener(StartGame);
-		QuitButton.onClick.AddListener(QuitGame);
-		SettingsButton.onClick.AddListener(OpenSettings);
-		CloseSettingsButton.onClick.AddListener(CloseSettings);
-	}
-	private void OnDisable()
-	{
-		StartButton.onClick.RemoveListener(StartGame);
-		QuitButton.onClick.RemoveListener(QuitGame);
-		SettingsButton.onClick.RemoveListener(OpenSettings);
-		CloseSettingsButton.onClick.RemoveListener(CloseSettings);
-	}
-	
-	private void StartGame()
-	{
+		state = StartMenuState.Start;
 		OnStart?.Invoke();
-		SceneManager.Instance.BufferSceneChange(StartSceneName);
-	}
-	private void QuitGame()
+        SceneManager.Instance.BufferSceneChange(StartSceneName);
+    }
+	public void QuitGame()
 	{
+		state = StartMenuState.Quit;
 		OnQuit?.Invoke();
-		Application.Quit();
-	}
-	private void OpenSettings()
-	{
+        Application.Quit();
+    }
+    public void OpenSettings()
+    {
+		state = StartMenuState.Settings;
 		OnSettings?.Invoke();
-		panel.SetActive(true);
-	}
-	private void CloseSettings()
-	{
+        panel.SetActive(true);
+    }
+    public void CloseSettings()
+    {
+		state = StartMenuState.Ready;
 		OnReady?.Invoke();
-		panel.SetActive(false);
-	}
+        panel.SetActive(false);
+    }
 }
 
 public enum StartMenuState
