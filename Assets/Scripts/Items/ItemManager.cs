@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static Dictionary<ItemType, Item> items = new Dictionary<ItemType, Item>();
+
+    private void Awake()
     {
-        
+        items.Add(ItemType.Key,ScriptableObject.CreateInstance<Key>());
+        items.Add(ItemType.Tool, ScriptableObject.CreateInstance<Tool>());
+        items.Add(ItemType.Artwork, ScriptableObject.CreateInstance<Artwork>());
     }
 
-    // Update is called once per frame
-    void Update()
+    public static Item GetItem(ItemType type)
     {
-        
+        return items[type];
     }
 }

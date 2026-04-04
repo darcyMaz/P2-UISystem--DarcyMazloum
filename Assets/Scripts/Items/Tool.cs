@@ -1,13 +1,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Tool", menuName = "Scriptable Objects/Tool")]
-public class Tool : ScriptableObject
+public class Tool : Item
 {
     [SerializeField] private Sprite sprite;
-    [SerializeField] private string keyName = "Tool";
+    [SerializeField] private string itemName = "Tool";
     [SerializeField] private ItemType itemType = ItemType.Tool;
 
-    public Sprite GetSprite() => sprite;
-    public string GetKeyName() => keyName;
-    public ItemType GetItemType() => itemType;
+    public override Sprite GetSprite() => sprite;
+    public override string GetItemName() => itemName;
+    public override ItemType GetItemType() => itemType;
 }

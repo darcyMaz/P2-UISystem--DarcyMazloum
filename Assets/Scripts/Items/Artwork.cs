@@ -1,12 +1,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Artwork", menuName = "Scriptable Objects/Artwork")]
-public class Artwork : ScriptableObject
+public class Artwork : Item
 {
     [SerializeField] private Sprite sprite;
-    [SerializeField] private string keyName = "Artwork";
+    [SerializeField] private string artworkName = "Item";
     [SerializeField] private ItemType itemType = ItemType.Artwork;
-    public Sprite GetSprite() => sprite;
-    public string GetKeyName() => keyName;
-    public ItemType GetItemType() => itemType;
+    public override Sprite GetSprite() => sprite;
+    public override string GetItemName() => artworkName;
+    public override ItemType GetItemType() => itemType;
 }

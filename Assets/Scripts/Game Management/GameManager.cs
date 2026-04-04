@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 /**
  *  Event choice explanation:
@@ -10,7 +12,7 @@ using System;
  *  Meanwhile, the rest of the events are triggered by interacting with other UI elements (and potentially character's interacting with GameObjects),
  *  which are easily configured using UnityEvents.
  *  
- */ 
+ */
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject QuestPanel;
 	[SerializeField] private GameObject InventoryPanel;
     
+	private List<Button> inventoryButtons = new List<Button>();
+
     private void Awake()
     {
 		if (instance != this && instance != null)
@@ -51,6 +55,19 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+		// Get all the UI slots in the inventory and add them to the list.
+		foreach (Transform child in InventoryPanel.transform)
+		{
+			Button currentButton;
+			if (!child.gameObject.TryGetComponent(out currentButton)) Debug.Log("The GameManager had a problem getting a Button from the inventory UI panel.");
+			else
+			{
+				inventoryButtons.Add(currentButton);
+			}
+		}
+
+		AdjustInventoryUI();
+
 		onHealthChanged?.Invoke(currentHealth);
 		onResourceChanged?.Invoke(currentResource);
 	}
@@ -99,4 +116,25 @@ public class GameManager : MonoBehaviour
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
         }
     }
+
+	public void AdjustInventoryUI()
+	{
+		// Get the count of inventory items
+		// Turn on that many buttons, along the way add inventory items' sprites to them
+
+		int itemsTotal = PlayerInventory.Instance.Count();
+		int buttonIndex = 0;
+
+		for (; buttonIndex < itemsTotal; buttonIndex++)
+		{
+			// set button to true and put in the sprite as the image
+			inventoryButtons[buttonIndex].gameObject.SetActive(true);
+			inventoryButtons[buttonIndex].gameObject.GetComponent<Image>().sprite = (ItemManager.GetItem(PlayerInventory.Instance.GetItemAt(buttonIndex))).GetSprite();
+		}
+		for (; buttonIndex < inventoryButtons.Count; buttonIndex++ )
+		{
+            // set the button is active to false
+            inventoryButtons[buttonIndex].gameObject.SetActive(false);
+        }
+	}
 }
