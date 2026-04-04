@@ -22,7 +22,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] UnityEvent onInventoryChanged;
     [SerializeField] UnityEvent <string> onItemAddFailed;
     [SerializeField] UnityEvent <string> onItemRemoveFailed;
-    private List<ItemType> inventory = new List<ItemType>();
+    private List<Item> inventory = new List<Item>();
 
     [SerializeField] private int MaximumItems = 16;
 
@@ -36,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
         Instance = this;
     }
 
-    public void AddItem(ItemType itemType)
+    public void AddItem(Item item)
     {
         if (inventory.Count == MaximumItems)
         {
@@ -44,7 +44,7 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        inventory.Add(itemType);
+        inventory.Add(item);
         onInventoryChanged?.Invoke();
     }
 
@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
         onInventoryChanged?.Invoke();
     }
 
-    public ItemType GetItemAt(int index)
+    public Item GetItemAt(int index)
     {
         return inventory[index];
     }
@@ -75,9 +75,9 @@ public class PlayerInventory : MonoBehaviour
         return MaximumItems;
     }
 
-    public IEnumerable<ItemType> GetInventory()
+    public IEnumerable<Item> GetInventory()
     {
-        foreach (ItemType item in inventory)
+        foreach (Item item in inventory)
         {
             yield return item;
         }

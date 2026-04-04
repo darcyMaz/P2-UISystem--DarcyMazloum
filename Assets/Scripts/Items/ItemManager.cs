@@ -1,44 +1,44 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private static Dictionary<ItemType, Item> items = new Dictionary<ItemType, Item>();
+    // I feel as though this isn't the best way to do this, but looking for a specific item is in O(n)... if you know what ItemType it is at least.
 
-    /*
-    static ItemManager()
-    {
-        //items.Add(ItemType.Key, ScriptableObject.CreateInstance<Key>());
-        //items.Add(ItemType.Tool, ScriptableObject.CreateInstance<Tool>());
-        //items.Add(ItemType.Artwork, ScriptableObject.CreateInstance<Artwork>());
-
-        Debug.Log("static constructor");
-
-        Artwork[] artworks = Resources.LoadAll<Artwork>("Assets/ScriptableObjects/Items/Artworks");
-
-        Debug.Log(artworks.Length);
-
-        foreach (Artwork art in artworks)
-        {
-            Debug.Log(art.GetItemName());
-        }
-    }
-    */
+    private static Dictionary<ItemType, Item[]> items = new Dictionary<ItemType, Item[]>();
 
     private void Awake()
     {
-        Artwork[] artworks = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Artworks");
+        Item[] artworks = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Artworks");
+        Item[] keys = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Keys");
+        Item[] tools = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Tools");
 
-        Debug.Log(artworks.Length);
-
-        foreach (Artwork art in artworks)
-        {
-            Debug.Log(art.GetItemName());
-        }
+        items.Add(ItemType.Artwork, artworks);
+        items.Add(ItemType.Key, keys);
+        items.Add(ItemType.Tool, tools);
     }
 
-    public static Item GetItem(ItemType type)
+    public static Item[] GetItemList(ItemType type)
     {
         return items[type];
+    }
+
+    public static Item TryGetItem(ItemType type, string name)
+    {
+        Item[] itemList; 
+        items.TryGetValue(type, out itemList);
+        if (itemList == null) { Debug.Log("An attempt to get an item from the item list failed. The ItemType was invalid.");  return null; }
+
+        foreach (Item i in itemList)
+        {
+            if (i.GetItemName() == name)
+            {
+                return i;
+            }
+        }
+
+        Debug.Log("An attempt to get an item from the item list failed. The string was invalid.");
+        return null;
     }
 }

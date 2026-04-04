@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class PlayerItemTest : MonoBehaviour
 {
+
     public void AddRandomItem()
     {
         System.Random rand = new System.Random();
-        int randInt = rand.Next(0,3);
+        int randIntItemType = rand.Next(0,3);
 
-        Debug.Log("rand: " + randInt + " result of conversion: " + (ItemType) randInt);
+        Debug.Log("rand: " + randIntItemType + " result of conversion: " + (ItemType)randIntItemType);
 
-        PlayerInventory.Instance.AddItem( (ItemType) randInt );
+        ItemType randIT = (ItemType)randIntItemType;
+        Item[] itemsToChooseFrom = ItemManager.GetItemList(randIT);
+        int randIntIndex = rand.Next(0,itemsToChooseFrom.Length-1);
+
+        PlayerInventory.Instance.AddItem(itemsToChooseFrom[randIntIndex] );
+
+        // Get a random itemtype then get its corresponding item list, and add one of those at random.
     }
     public void RemoveRandomItem() 
     {

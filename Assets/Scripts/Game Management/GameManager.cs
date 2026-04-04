@@ -129,7 +129,13 @@ public class GameManager : MonoBehaviour
 		{
 			// set button to true and put in the sprite as the image
 			inventoryButtons[buttonIndex].gameObject.SetActive(true);
-			inventoryButtons[buttonIndex].gameObject.GetComponent<Image>().sprite = (ItemManager.GetItem(PlayerInventory.Instance.GetItemAt(buttonIndex))).GetSprite();
+
+			Image buttonImage;
+			if (!inventoryButtons[buttonIndex].gameObject.TryGetComponent(out buttonImage)) Debug.Log("GameManager tried to change the sprite of an item slot in inventory but failed. In AdjustInventoryUI().");
+			else
+			{
+                buttonImage.sprite = PlayerInventory.Instance.GetItemAt(buttonIndex).GetSprite();
+			}
 		}
 		for (; buttonIndex < inventoryButtons.Count; buttonIndex++ )
 		{
