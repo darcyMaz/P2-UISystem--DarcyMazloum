@@ -8,15 +8,15 @@ public class PlayerItemTest : MonoBehaviour
         System.Random rand = new System.Random();
         int randIntItemType = rand.Next(0,3);
 
-        Debug.Log("rand: " + randIntItemType + " result of conversion: " + (ItemType)randIntItemType);
+        // Debug.Log("rand: " + randIntItemType + " result of conversion: " + (ItemType)randIntItemType);
 
         ItemType randIT = (ItemType)randIntItemType;
         Item[] itemsToChooseFrom = ItemManager.GetItemList(randIT);
-        int randIntIndex = rand.Next(0,itemsToChooseFrom.Length-1);
+        int randIntIndex = rand.Next(0,itemsToChooseFrom.Length);
 
-        PlayerInventory.Instance.AddItem(itemsToChooseFrom[randIntIndex] );
-
-        // Get a random itemtype then get its corresponding item list, and add one of those at random.
+        // Debug.Log("Items to choose from length: " + itemsToChooseFrom.Length);
+    
+        PlayerInventory.Instance.AddItem( itemsToChooseFrom[randIntIndex] );
     }
     public void RemoveRandomItem() 
     {

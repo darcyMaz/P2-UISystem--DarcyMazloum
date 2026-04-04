@@ -11,8 +11,8 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         Item[] artworks = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Artworks");
-        Item[] keys = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Keys");
-        Item[] tools = Resources.LoadAll<Artwork>("ScriptableObjects/Items/Tools");
+        Item[] keys = Resources.LoadAll<Key>("ScriptableObjects/Items/Keys");
+        Item[] tools = Resources.LoadAll<Tool>("ScriptableObjects/Items/Tools");
 
         items.Add(ItemType.Artwork, artworks);
         items.Add(ItemType.Key, keys);
