@@ -1,12 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using System;
 
 /**
- *  Render mode decision: I chose Screen Space - Overlay because the main menu does not rely on anything in front of the camera like moving GameObjects or lighting effects. 
- *  I also don't need to worry about z-positioning as the menu is very simple.
- * 
+ *  Render mode decision: I chose Screen Space - Overlay because the Canvas on both the Start Menu and the Game Scene rely neither on the camera or the position in the world.
+ *						  The Canvas should be on the screen at all times.
  * */
 
 public class StartMenuManager : MonoBehaviour
